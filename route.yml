@@ -1,0 +1,13 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: locust
+spec:
+  host: locust.apps.ocp.tjro.jus.br
+  to:
+    kind: Service
+    name: locust
+    weight: 100
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: locust-worker
+spec:
+  selector:
+    matchLabels:
+      app: locust-worker
+  template:
+    metadata:
+      labels:
+        app: locust-worker
+    spec:
+      containers:
+        - name: locust-worker
+          image: locustio/locust
+          command: ["locust"]
+          args: ["-f", "/home/locust/locustfile.py", "--worker", "--master-host=locust-master", "--master-port=5557"]
+          ports:
+            - containerPort: 8089
+          volumeMounts:
+            - mountPath: /home/locust
+              name: locust-script
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 200Mi
+      volumes:
+        - name: locust-script
+          configMap:
+            name: locust-script
