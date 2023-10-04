@@ -21,9 +21,6 @@ spec:
           volumeMounts:
             - mountPath: /home/locust
               name: locust-script
-            volumeMounts:
-            - mountPath: /home/locust
-              name: locust-script
             - mountPath: /home/locust/requirements.txt
               subPath: requirements.txt
               name: requirements
