@@ -21,8 +21,14 @@ spec:
           volumeMounts:
             - mountPath: /home/locust
               name: locust-script
+            - mountPath: /home/locust/requirements.txt
+              subPath: requirements.txt
+              name: requirements
           imagePullPolicy: IfNotPresent
       volumes:
         - name: locust-script
           configMap:
             name: locust-script
+        - name: requirements
+          configMap:
+            name: requirements

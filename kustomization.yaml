@@ -11,3 +11,6 @@ configMapGenerator:
 - name: locust-script
   files:
   - locustfile.py
+- name: requirements
+  files:
+  - requirements
