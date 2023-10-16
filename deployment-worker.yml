@@ -13,14 +13,15 @@ spec:
     spec:
       containers:
         - name: locust-worker
-          image: locustio/locust
+          image: malacration/locust
           command: ["locust"]
           args: ["-f", "/home/locust/locustfile.py", "--worker", "--master-host=locust-master", "--master-port=5557"]
           ports:
             - containerPort: 8089
           volumeMounts:
-            - mountPath: /home/locust
+            - mountPath: /home/locust/locustfile.py
               name: locust-script
+              subPath: locustfile.py
             - mountPath: /home/locust/requirements.txt
               subPath: requirements.txt
               name: requirements
